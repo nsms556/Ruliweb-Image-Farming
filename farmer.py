@@ -9,6 +9,14 @@ def get_img_src(img_tags) :
 def convert_orginal_size_url(img_urls) :
     return list(map(lambda x : x.replace('img', 'ori'), img_urls))
 
+def convert_video_to_gif(gif_urls) :
+    return list(map(lambda x : x.replace('mp4?gif', 'gif'), gif_urls))
+
+def get_gif_src(gif_tags) :
+    srcs = list(map(lambda x : x['src'], gif_tags))
+
+    return convert_video_to_gif(srcs)
+    
 def parsing_image_urls(read_url, original_size) :
     req = request.Request(read_url)
     res = request.urlopen(req).read()
@@ -16,11 +24,12 @@ def parsing_image_urls(read_url, original_size) :
     original_doc = BeautifulSoup(res, 'html.parser')
     main_view = original_doc.find('div', class_='board_main_view')
     img_urls = get_img_src(main_view.find_all('img'))
+    gif_urls = get_gif_src(main_view.find_all('video'))
 
     if original_size :
-        return convert_orginal_size_url(img_urls)
+        return convert_orginal_size_url(img_urls) + gif_urls
     
-    return img_urls
+    return img_urls + gif_urls
 
 def download_image(url, folder) :
     file_name = url.split('/')[-1]
