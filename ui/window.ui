@@ -59,7 +59,7 @@
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Folder</string>
+        <string>다운로드 위치</string>
        </property>
       </widget>
      </item>
@@ -80,7 +80,7 @@
      <item>
       <widget class="QLabel" name="img_size_label">
        <property name="text">
-        <string>Image Size</string>
+        <string>이미지 크기</string>
        </property>
       </widget>
      </item>
@@ -89,7 +89,7 @@
        <item>
         <widget class="QRadioButton" name="radio_original">
          <property name="text">
-          <string>Original</string>
+          <string>원본</string>
          </property>
          <property name="checked">
           <bool>true</bool>
@@ -99,7 +99,7 @@
        <item>
         <widget class="QRadioButton" name="radio_resize">
          <property name="text">
-          <string>Resized</string>
+          <string>리사이즈</string>
          </property>
          <property name="checked">
           <bool>false</bool>
@@ -133,14 +133,14 @@
        <item>
         <widget class="QPushButton" name="bt_dl">
          <property name="text">
-          <string>Download</string>
+          <string>다운로드</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QPushButton" name="bt_close">
          <property name="text">
-          <string>Close</string>
+          <string>닫기</string>
          </property>
         </widget>
        </item>

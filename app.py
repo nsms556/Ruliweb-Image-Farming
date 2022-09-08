@@ -1,10 +1,11 @@
 import sys
 from getpass import getuser
 
-from PyQt5.QtWidgets import QApplication
+from PyQt5.QtWidgets import QApplication, QMessageBox
 
-from ui.ui import DisplayWindow
+from ui import DisplayWindow
 import farmer
+
 
 class Application(DisplayWindow) :
     def __init__(self):
@@ -26,17 +27,20 @@ class Application(DisplayWindow) :
             self.ori_size = False
 
     def bt_dl_func(self) :
-        self.reset_progress()
+        self.change_progress(0)
 
         self.post_url = self.url_edit.text()
 
         img_urls = farmer.parsing_image_urls(self.post_url, self.ori_size)
         img_count = len(img_urls)
 
-        for i, url in enumerate(img_urls) :
-            farmer.download_image(url, self.folder_edit.text())
+        if img_count == 0 :
+            QMessageBox.critical(self, '짤이 없음', '다운로드할 짤이 없습니다')
+        else :
+            for i, url in enumerate(img_urls) :
+                farmer.download_image(url, self.folder_edit.text())
 
-            self.change_progress(self.calc_progress(i, img_count))
+                self.change_progress(self.calc_progress(i, img_count))
 
     def calc_progress(self, now, total) :
         return int((now+1) / total * 100)

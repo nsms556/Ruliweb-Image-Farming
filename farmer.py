@@ -9,11 +9,21 @@ def get_img_src(img_tags) :
 def convert_orginal_size_url(img_urls) :
     return list(map(lambda x : x.replace('img', 'ori'), img_urls))
 
-def convert_video_to_gif(gif_urls) :
-    return list(map(lambda x : x.replace('mp4?gif', 'gif'), gif_urls))
+def convert_video_to_gif(vid_urls) :
+    return list(map(lambda x : x.replace('mp4?', ''), vid_urls))
 
-def get_gif_src(gif_tags) :
+def is_gif_webp(img_url) :
+    gif = img_url[-7:]
+    webp = img_url[-8:]
+
+    if gif == 'mp4?gif' or webp == 'mp4?webp' :
+        return True
+
+    return False
+
+def get_vid_src(gif_tags) :
     srcs = list(map(lambda x : x['src'], gif_tags))
+    srcs = [x for x in srcs if is_gif_webp(x)]
 
     return convert_video_to_gif(srcs)
     
@@ -24,7 +34,7 @@ def parsing_image_urls(read_url, original_size) :
     original_doc = BeautifulSoup(res, 'html.parser')
     main_view = original_doc.find('div', class_='board_main_view')
     img_urls = get_img_src(main_view.find_all('img'))
-    gif_urls = get_gif_src(main_view.find_all('video'))
+    gif_urls = get_vid_src(main_view.find_all('video'))
 
     if original_size :
         return convert_orginal_size_url(img_urls) + gif_urls

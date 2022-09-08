@@ -1,8 +1,17 @@
+import os, sys
+
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QApplication
 from PyQt5.QtCore import QCoreApplication
 from PyQt5 import uic
 
-ui_class = uic.loadUiType('ui/window.ui')[0]
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    return os.path.join(base_path, relative_path)
+
+ui = resource_path('ui/window.ui')
+ui_class = uic.loadUiType(ui)[0]
 
 class DisplayWindow(QMainWindow, ui_class) :
     def __init__(self) :
