@@ -1,6 +1,8 @@
 # Folder #
 __pycache__
+build
+dist
 
 # File #
 farmer.ipynb
-
+*.spec
