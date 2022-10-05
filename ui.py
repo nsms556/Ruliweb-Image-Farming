@@ -3,6 +3,7 @@ from getpass import getuser
 
 from PyQt5.QtWidgets import QMainWindow, QFileDialog, QApplication
 from PyQt5.QtCore import QCoreApplication
+from PyQt5.QtGui import QIcon
 from PyQt5 import uic
 
 from farmer import resource_path
@@ -16,6 +17,7 @@ class DisplayWindow(QMainWindow, ui_class) :
     def __init__(self) :
         super().__init__()
         self.setupUi(self)
+        self.setWindowIcon(QIcon(resource_path(static.ICON_DIR)))
 
         self.default_target = static.DEFAULT_TARGET.format(getuser())
         self.config = self.load_config()
