@@ -1,10 +1,9 @@
 import sys
-from getpass import getuser
 
 from PyQt5.QtWidgets import QApplication, QMessageBox
 
-from ui import DisplayWindow
 import farmer
+from ui import DisplayWindow
 
 
 class Application(DisplayWindow) :
@@ -13,13 +12,11 @@ class Application(DisplayWindow) :
 
         self.ori_size = True
         self.post_url = ""
-        
-        self.folder_edit.setText('C:/Users/{}/Downloads'.format(getuser()))
 
         self.bt_dl.clicked.connect(self.bt_dl_func)
         self.radio_original.clicked.connect(self.size_radio_func)
         self.radio_resize.clicked.connect(self.size_radio_func)
-        
+
     def size_radio_func(self) :
         if self.radio_original.isChecked() :
             self.ori_size = True
